@@ -1,11 +1,102 @@
-<html>
+
+  <!DOCTYPE html>
+<html lang="en">
 <head>
-  <title> My Gituhb Page! </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cool Game Website</title>
+    <style>
+        body {
+            background-color: #1d1d1d;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h1 {
+            color: #ff6f61;
+        }
+        .game-container {
+            background-color: #333;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            width: 350px;
+        }
+        input[type="number"] {
+            padding: 10px;
+            margin: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: 2px solid #ff6f61;
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff3d2e;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
 </head>
-  <body>
-    <h1>MY Github Page</h1>
-    <p>
-      This is a Github page to demonstrate how github pages work.
-    </p>
-  </body>
+<body>
+    <h1>Super Cool Game Website</h1>
+    <div class="game-container">
+        <h2>Guess the Number!</h2>
+        <p>Guess the number between 1 and 100</p>
+        <input type="number" id="guessInput" placeholder="Enter your guess" />
+        <button onclick="checkGuess()">Guess!</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        let secretNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById("guessInput").value);
+            const resultDiv = document.getElementById("result");
+            attempts++;
+
+            if (guess === secretNumber) {
+                resultDiv.textContent = `Congratulations! You guessed the number in ${attempts} attempts.`;
+                resultDiv.style.color = "green";
+                resetGame();
+            } else if (guess < secretNumber) {
+                resultDiv.textContent = `Too low! Try again.`;
+                resultDiv.style.color = "red";
+            } else if (guess > secretNumber) {
+                resultDiv.textContent = `Too high! Try again.`;
+                resultDiv.style.color = "red";
+            }
+        }
+
+        function resetGame() {
+            setTimeout(() => {
+                secretNumber = Math.floor(Math.random() * 100) + 1;
+                attempts = 0;
+                document.getElementById("guessInput").value = '';
+                document.getElementById("result").textContent = '';
+            }, 3000);
+        }
+    </script>
+</body>
 </html>
